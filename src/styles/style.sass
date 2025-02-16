@@ -1,4 +1,13 @@
 @use "common/reset.sass" as *
+@use "common/mixins.sass" as *
+@use "common/modificators.sass" as *
+@use "common/vars.sass" as *
+
+@use "components/input.sass" as *
+@use "components/loader.sass" as *
+@use "components/progress-block.sass" as *
 
 body 
-    background: #d2dfdc
+    +flex()
+    background: $primary100
+

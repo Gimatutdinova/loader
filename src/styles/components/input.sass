@@ -1,0 +1,62 @@
+@use "../common/mixins.sass" as *
+@use "../common/vars.sass" as *
+    
+.input-number
+    +flex(8px)
+    +font(24px)
+    input 
+        +size(50px, 30px)
+        +border()
+        +font()
+        border-radius: $b-radius
+        display: block
+        text-align: center
+        -moz-appearance: textfield
+        -webkit-appearance: textfield
+        appearance: textfield
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button
+            display: none
+
+.input-toggle 
+    position: relative
+    +flex(8px, start)
+    width: 100%
+    left: -8px
+    +font(24px)
+    input
+        opacity: 0
+        width: 0
+        height: 0
+    .slider
+        +size(50px, 30px)
+        background-color: $white
+        +border()
+        cursor: pointer
+        -webkit-transition: .4s
+        transition: .4s
+        transform: scale(1)
+        &.round
+            border-radius: $b-radius
+            &:before
+                border-radius: 100%
+                background-color: $primary200
+        &:before
+            +size(24px)
+            position: absolute
+            content: ""
+            left: 2px
+            bottom: 2px
+            background-color: white
+            -webkit-transition: .4s
+            transition: .4s
+        &::after
+            display: none
+    input
+        &:checked + .slider
+            background-color: $primary200
+            &.round
+                &::before
+                    background-color: white
+        &:checked + .slider:before
+            transform: translateX(20px)

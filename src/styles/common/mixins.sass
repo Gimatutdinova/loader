@@ -1,0 +1,19 @@
+@use "vars.sass" as *
+
+=size($width, $height: $width)
+	width: $width
+	height: $height
+
+=flex($gap: 0px, $jc: center, $ai: center, $fd: row)
+	display: flex
+	justify-content: $jc
+	align-items: $ai
+	gap: $gap
+	flex-direction: $fd
+
+=border($width: 1px, $style: solid, $color: $primary200)
+	border: $width $style $color
+
+=font($size: 16px, $weight: normal)
+	font-size: $size
+	font-weight: $weight

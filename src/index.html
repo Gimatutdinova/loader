@@ -3,10 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>progress-block</title>
 </head>
 <body>
-    <h1>Document</h1>
-    <script src="./main.js"></script>
+    <div class="progress-block">
+        <div class='progress-block__loader'>
+            <div class='loader'>
+            </div>
+        </div>
+        <div class='progress-block__info'>
+            <label class='input-number'>
+                <input type="number" min=0 max=100>
+                <p>Value</p>
+            </label>
+            <label class=input-toggle>
+                <input type='checkbox' id='animateBtn'>
+                <span class='slider round'></span>
+                <p>Animate</p>
+            </label>
+            <label class=input-toggle>
+                <input type='checkbox' id='hideBtn'>
+                <span class='slider round'></span>
+                <p>Hide</p>
+            </label>
+        </div>
+    </div>
 </body>
 </html>

@@ -1,0 +1,46 @@
+@use "../common/mixins.sass" as *
+@use "../common/vars.sass" as *
+
+.loader 
+    +size(200px)
+    +flex()
+    margin: 0 auto
+    position: relative
+    border-radius: 100%
+    &__circle
+        +size(100%)
+        &_item
+            +size(100%)
+            position: absolute
+            clip: rect(0px, 200px, 200px, 100px)
+            border-radius: 100%
+        &_empty 
+            background-color: $primary100
+            transform: rotate(180deg)
+        &_fill
+            background-color: $primary200
+        &_percent
+            &.empty
+                background-color: $primary100
+            &.fill
+                background-color: $primary200
+            &:not(.not-transition)
+                transition: transform 300ms     
+    &::after
+        +size(180px)
+        +flex()
+        +font(36px, bold)
+        content: attr(data-percent)
+        position: absolute
+        background: $white
+        border-radius: 100%
+        transform: rotate(0deg)!important
+    &.animate 
+        .loader__circle
+            animation: rotation 1.5s linear infinite
+
+@keyframes rotation 
+    0%
+        transform: rotate(0deg)
+    100%
+        transform: rotate(360deg)

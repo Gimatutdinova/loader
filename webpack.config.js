@@ -10,6 +10,7 @@ module.exports = {
   resolve: {
     alias: {
       Styles: path.resolve(__dirname, 'src/styles/'),
+      Scripts: path.resolve(__dirname, 'src/scripts/'),
     },
   },
   module: {

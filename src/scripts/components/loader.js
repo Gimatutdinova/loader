@@ -28,6 +28,9 @@ export default class Loader {
     return this.percent;
   }
   setPercent(percent) {
+    if (!(typeof(percent) === "number")) throw 'Недопустимый тип переменной';
+    if (percent < 0 || percent > 100) throw 'Значение вне заданного диапазона';
+  
     this.percent = percent;
   }
 

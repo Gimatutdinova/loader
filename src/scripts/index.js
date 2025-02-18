@@ -17,10 +17,11 @@ document.addEventListener('DOMContentLoaded', function () {
       input.value = 'this.percent';
   });
   input?.addEventListener('input', (e) => {
+    input.value = input.value.replace(/^0+/, "");
     if (e.data?.match(/[e,+,-]/) || Number(input.value) > input.max || input.value === '0') 
       input.value = loader.getPercent() || '';
     else {
-      loader.setPercent(input.value || 0);
+      loader.setPercent(Number(input.value) || 0);
       loader.updateLoader();
     }
   });

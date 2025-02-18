@@ -1,23 +1,25 @@
 export default class Loader {
-  constructor(block, percent = 55) {
+  constructor(block, percent = 75) {
     if (!block) return;
-    this.loader = block;
     this.percent = percent;
 
     block.insertAdjacentHTML(
       'beforeend',
       `
-        <div class='loader__circle'>
-          <div class='loader__circle_item loader__circle_empty'></div>
-          <div class='loader__circle_item loader__circle_fill'></div>
-          <div class='loader__circle_item loader__circle_percent'></div>
+        <div class='loader'>
+          <div class='loader__circle'>
+            <div class='loader__circle_item loader__circle_empty'></div>
+            <div class='loader__circle_item loader__circle_fill'></div>
+            <div class='loader__circle_item loader__circle_percent'></div>
+          </div>
         </div>
       `
     );
 
+    this.loader = block.querySelector('.loader');
     this.loaderCircle = block.querySelector('.loader__circle');
     this.percentLoader = this.loaderCircle.querySelector('.loader__circle_percent');
-    this.changePercentBlock();
+    this.updateLoader();
 
     return this;
   }
@@ -25,34 +27,41 @@ export default class Loader {
   getPercent() {
     return this.percent;
   }
-
   setPercent(percent) {
     this.percent = percent;
   }
 
-  changePercentBlock() {
+  updateLoader() {
     if (!this.percentLoader) return;
+
+    /* 
+      Функция для изменения свойства transform и класс fill (для изменения цвета)
+        элемента loader__circle_percent
+      Принимает:
+        - num (числовое значение) - новое значение свойства transform
+        - fullness (булевое значение) - добавление (true) / удаление (false) класса fill
+    */
+    let changePercentBlockStyle = (num, fullness) => {
+      this.percentLoader.style.webkitTransform = `rotate(${num}deg)`;
+      this.percentLoader.style.msTransform = `rotate(${num}deg)`;
+      this.percentLoader.style.MozTransform = `rotate(${num}deg)`;
+  
+      if (fullness)
+        this.percentLoader.classList.add('fill');
+      else
+        this.percentLoader.classList.remove('fill');
+    }
 
     let filled = (360 / 100) * this.percent;
     
     if (this.percent < 50)
-      this.changePercentBlockStyle(filled, 'empty')
+      changePercentBlockStyle(filled, false);
     else
-      this.changePercentBlockStyle(filled - 180, 'fill');
+      changePercentBlockStyle(filled - 180, true);
 
     this.loader.dataset.percent = `${this.percent}%`;
   }
 
-  changePercentBlockStyle(num, color) {
-    this.percentLoader.style.webkitTransform = `rotate(${num}deg)`;
-    this.percentLoader.style.msTransform = `rotate(${num}deg)`;
-    this.percentLoader.style.MozTransform = `rotate(${num}deg)`;
-
-    if (!this.percentLoader.classList.contains(color)) {
-      this.percentLoader.classList.remove('empty', 'fill');
-      this.percentLoader.classList.add(color);
-    }
-  }
   addAnimation() {
     this.loader.classList.add('animate');
   }
